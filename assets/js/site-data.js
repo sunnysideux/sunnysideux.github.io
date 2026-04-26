@@ -8,7 +8,7 @@ window.siteData = {
     affiliation: "Centre for Educational Technology, Indian Institute of Technology Bombay",
     role: "PhD Candidate",
     location: "Mumbai, India",
-    email: "mails.sunnyprajapati@gmail.com",
+    email: "22d1201@iitb.ac.in",
     logoFile: "assets/images/logo-sunny.png",
     logoAlt: "Stylized portrait logo of Sunny Prakash Prajapati",
     bioShort:
@@ -537,7 +537,7 @@ window.siteData = {
   resources: [
         {
         label: "Educational Technology, IIT Bombay",
-        value: "mails.sunnyprajapati@gmail.com"
+        value: "22d1201@iitb.ac.in"
 		}
 
 		],
@@ -547,8 +547,8 @@ window.siteData = {
     links: [
       {
         label: "Email",
-        value: "mails.sunnyprajapati@gmail.com",
-        url: "mailto:mails.sunnyprajapati@gmail.com"
+        value: "22d1201@iitb.ac.in",
+        url: "mailto:22d1201@iitb.ac.in"
       },
      /* {
         label: "Google Scholar",
