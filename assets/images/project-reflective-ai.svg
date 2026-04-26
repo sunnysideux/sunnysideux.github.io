@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-labelledby="title desc">
+  <title id="title">Reflective AI project placeholder</title>
+  <desc id="desc">Abstract academic illustration with interface cards and speech prompts.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#edf3f6"/>
+      <stop offset="100%" stop-color="#dceaf2"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" rx="36" fill="url(#bg)"/>
+  <circle cx="658" cy="104" r="72" fill="#c0dbe8"/>
+  <circle cx="128" cy="418" r="94" fill="#d9ece1"/>
+  <rect x="96" y="88" width="608" height="320" rx="28" fill="#ffffff" stroke="#b8cad6" stroke-width="4"/>
+  <rect x="140" y="132" width="200" height="36" rx="18" fill="#174f78" opacity="0.16"/>
+  <rect x="140" y="188" width="288" height="22" rx="11" fill="#174f78" opacity="0.11"/>
+  <rect x="140" y="224" width="252" height="22" rx="11" fill="#174f78" opacity="0.11"/>
+  <rect x="472" y="144" width="176" height="120" rx="22" fill="#174f78"/>
+  <rect x="494" y="170" width="132" height="14" rx="7" fill="#ffffff" opacity="0.8"/>
+  <rect x="494" y="198" width="102" height="14" rx="7" fill="#ffffff" opacity="0.56"/>
+  <rect x="494" y="226" width="120" height="14" rx="7" fill="#ffffff" opacity="0.56"/>
+  <rect x="140" y="292" width="488" height="74" rx="20" fill="#edf3f6"/>
+  <path d="M196 326c32-30 56-30 88 0 28 26 52 26 80 0 32-30 56-30 88 0 28 26 52 26 80 0" fill="none" stroke="#216a68" stroke-width="8" stroke-linecap="round"/>
+</svg>
