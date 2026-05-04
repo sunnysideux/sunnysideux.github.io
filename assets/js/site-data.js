@@ -431,6 +431,41 @@ window.siteData = {
         images: []
       }
     },
+	{
+      id: "project-sentence-sprint",
+      title: "Design of a sentence construction game",
+      period: "2026",
+      summary:
+        "A game that supports your English language learning journey by providing you with a platform to learn sentence construction",
+      tags: [
+        "Learning experience design",
+        "Language Learning ",
+        "HCI for Educational Technology"
+      ],
+      outcomes: [
+        "Design Conceptualization for phygital textbooks in classroom learning context",
+		"Presented the initial research explorations and investigation plan at ACM IUI Conference 2023"
+        //""
+      ],
+      image: "assets/images/sentence-p-1.png",
+      alt: "Source: Prasad, A., Prajapati, S., & BADHE, V. (2023, December). Design and Development of a Sentence Construction Game for Deaf and Hard of Hearing (DHH) Users: A Qualitative Usability Study. In International Conference on Computers in Education. ",
+      links: [],
+      details: {
+        paragraphs: [" "],
+        images: [
+		    {
+				src: "assets/images/sentence-p-2.png",
+				alt: "Sentence sprint game",
+				caption: "Sentence Sprint"
+			},
+			{
+				src: "assets/images/sentence-p-3.png",
+				alt: "Sentence sprint game screen",
+				caption: "Sentence Sprint"
+			}
+    	]
+      }
+    },
     /*{
       id: "project-mixed-reality",
       title: "AI-Augmented Mixed Reality Learning Interfaces",
