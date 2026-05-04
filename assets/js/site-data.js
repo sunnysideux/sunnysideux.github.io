@@ -101,7 +101,8 @@ window.siteData = {
   featuredProjectIds: [
     "project-phygital-textbooks",
     "project-active-reading",
-    "project-robotub"
+    "project-robotub",
+	"project-sentence-sprint"
   ],
   publications: [
     {
