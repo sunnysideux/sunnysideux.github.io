@@ -452,7 +452,7 @@ window.siteData = {
       alt: "Source: Prasad, A., Prajapati, S., & BADHE, V. (2023, December). Design and Development of a Sentence Construction Game for Deaf and Hard of Hearing (DHH) Users: A Qualitative Usability Study. In International Conference on Computers in Education. ",
       links: [],
       details: {
-        paragraphs: [" "],
+        paragraphs: [" Check out the link to download. "],
         images: [
 		    {
 				src: "assets/images/sentence-p-2.png",
@@ -466,7 +466,7 @@ window.siteData = {
 			}
     	]
       }
-    },
+    }
     /*{
       id: "project-mixed-reality",
       title: "AI-Augmented Mixed Reality Learning Interfaces",
