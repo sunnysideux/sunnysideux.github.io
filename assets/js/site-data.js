@@ -463,7 +463,7 @@ window.siteData = {
 				src: "assets/images/sentence-p-3.png",
 				alt: "Sentence sprint game screen",
 				caption: "Sentence Sprint"
-			}
+			},
     	]
       }
     }
