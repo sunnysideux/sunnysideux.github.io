@@ -45,7 +45,7 @@ window.siteData = {
   },
   about: {
     pageIntro:
-      "My research explores how learning solutions can be designed for authentic learning settings using technologies like LLMs and design of learning experiences. Currently for my PhD, I am investigating the phygital reading behaviors of school students. Please refer to my publications to know more about the research in that area",
+      "My research explores how effective Edtech solutions can be designed for authentic learning settings using technologies like XR and LLMs. For my PhD thesis I am investigating academic reading behaviors of school students in Phygital settings. Please refer to my publications to know more about my research.",
     currentAffiliation:
       "I am currently a PhD Research Scholar at the Centre for Educational Technology, IIT Bombay",
     background:
@@ -71,6 +71,11 @@ window.siteData = {
       }
     ],
     themes: [
+	  {
+        title: "Latest",
+        description:
+          "Check out the position paper titled 'Towards Modeling Augmented Reading in a Phygital Learning System Using Learning Analytics Approaches', presented at CHI Workshop, link here: https://chi-star-workshop.github.io/"
+      },
       {
         title: "Phygital textbooks and active reading",
         description:
