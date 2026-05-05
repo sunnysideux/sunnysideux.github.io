@@ -444,15 +444,14 @@ window.siteData = {
         "HCI for Educational Technology"
       ],
       outcomes: [
-        "Design Conceptualization for phygital textbooks in classroom learning context",
-		"Presented the initial research explorations and investigation plan at ACM IUI Conference 2023"
+        "Analogous research with the DHH users published at ICCE 2023: Prasad, A., Prajapati, S., & BADHE, V. (2023, December). Design and Development of a Sentence Construction Game for Deaf and Hard of Hearing (DHH) Users: A Qualitative Usability Study. In International Conference on Computers in Education. "
         //""
       ],
       image: "assets/images/sentence-p-1.png",
       alt: "Source: Prasad, A., Prajapati, S., & BADHE, V. (2023, December). Design and Development of a Sentence Construction Game for Deaf and Hard of Hearing (DHH) Users: A Qualitative Usability Study. In International Conference on Computers in Education. ",
       links: [],
       details: {
-        paragraphs: [" Check out the link to download. "],
+        paragraphs: ["Link to download the app: https://github.com/sunnysideux/sentence-sprint/releases/download/v1.0.0/Sentence.Sprint.apk "],
         images: [
 		    {
 				src: "assets/images/sentence-p-2.png",
