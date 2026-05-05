@@ -576,7 +576,7 @@ window.siteData = {
   },
   resources: [
         {
-        label: "Educational Technology, IIT Bombay",
+        title: "Educational Technology, IIT Bombay",
         value: "22d1201@iitb.ac.in"
 		}
 
