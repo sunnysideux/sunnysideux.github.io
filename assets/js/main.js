@@ -189,14 +189,7 @@
           </div>
           <div class="key-points">
             ${siteData.about.themes
-              .map(
-                (theme) => `
-                  <article class="card subtle-card">
-                    <h3>${theme.title}</h3>
-                    <p>${theme.description}</p>
-                  </article>
-                `
-              )
+              .map((theme) => renderThemeCard(theme, "card subtle-card"))
               .join("")}
           </div>
         </div>
@@ -281,14 +274,7 @@
           </div>
           <div class="card-grid">
             ${siteData.about.themes
-              .map(
-                (theme) => `
-                  <article class="card">
-                    <h3>${theme.title}</h3>
-                    <p>${theme.description}</p>
-                  </article>
-                `
-              )
+              .map((theme) => renderThemeCard(theme, "card"))
               .join("")}
           </div>
         </div>
@@ -653,13 +639,36 @@
   }
 
   function renderResourceItem(item) {
+    const hasUrl = Boolean(item.url);
+    const tagName = hasUrl ? "a" : "article";
     const externalAttributes = isExternalResourceLink(item.url) ? 'target="_blank" rel="noopener"' : "";
+    const hrefAttribute = hasUrl ? `href="${item.url}" ${externalAttributes}` : "";
+    const className = `resource-item${hasUrl ? " is-linked" : ""}`;
+    const value = item.value ? `<p class="resource-value">${item.value}</p>` : "";
+    const description = item.description ? `<p>${item.description}</p>` : "";
+    const action = hasUrl ? `<span class="resource-action">${item.linkLabel || "Open resource"}</span>` : "";
 
     return `
-      <a class="resource-item" href="${item.url}" ${externalAttributes}>
-        <span class="publication-badge">Recommended</span>
+      <${tagName} class="${className}" ${hrefAttribute}>
+        <span class="publication-badge">${item.badge || "Resource"}</span>
         <h3>${item.title}</h3>
-      </a>
+        ${value}
+        ${description}
+        ${action}
+      </${tagName}>
+    `;
+  }
+
+  function renderThemeCard(theme, className) {
+    const link = theme.link && theme.link.url
+      ? ` <a class="inline-link" href="${theme.link.url}" target="_blank" rel="noopener">${theme.link.label || "Read more"}</a>`
+      : "";
+
+    return `
+      <article class="${className}">
+        <h3>${theme.title}</h3>
+        <p>${theme.description}${link}</p>
+      </article>
     `;
   }
 
@@ -791,6 +800,6 @@
   }
 
   function isExternalResourceLink(url) {
-    return /^https?:\/\//.test(url) || url.startsWith("mailto:");
+    return typeof url === "string" && (/^https?:\/\//.test(url) || url.startsWith("mailto:"));
   }
 })();

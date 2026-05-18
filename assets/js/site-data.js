@@ -4,7 +4,7 @@ window.siteData = {
   profile: {
     name: "Sunny Prakash Prajapati",
     tagline:
-      "I create funcitonal Edtech solutions for real world contexts.",
+      "I create functional EdTech solutions for real-world contexts.",
     affiliation: "Centre for Educational Technology, Indian Institute of Technology Bombay",
     role: "PhD Candidate",
     location: "Mumbai, India",
@@ -25,12 +25,12 @@ window.siteData = {
       "AI-augmented learning",
       "Design research",
       "Agent-based Modelling",
-	  "Complexity"
+      "Complexity"
     ],
     quickFacts: [
       {
         label: "Current focus",
-        value: "Developing LLM integrated tools to support academic reading"
+        value: "Developing LLM-integrated tools to support academic reading"
       },
       {
         label: "An unusual skill",
@@ -45,11 +45,11 @@ window.siteData = {
   },
   about: {
     pageIntro:
-      "My research explores how effective Edtech solutions can be designed for authentic learning settings using technologies like XR and LLMs. For my PhD thesis I am investigating academic reading behaviors of school students in Phygital settings. Please refer to my publications to know more about my research.",
+      "My research explores how effective EdTech solutions can be designed for authentic learning settings using technologies like XR and LLMs. For my PhD thesis, I am investigating academic reading behaviors of school students in phygital settings. Please refer to my publications to know more about my research.",
     currentAffiliation:
       "I am currently a PhD Research Scholar at the Centre for Educational Technology, IIT Bombay",
     background:
-      "My background combines engineering, product design, and educational technology. That path continues to shape how I approach research as in I try to conciously create systems for learning such that they are useful and have the potential for real world use.",
+      "My background combines engineering, product design, and educational technology. That path continues to shape how I approach research: I try to consciously create systems for learning that are useful and have the potential for real-world use.",
     education: [
       {
         degree: "PhD in Educational Technology",
@@ -71,10 +71,14 @@ window.siteData = {
       }
     ],
     themes: [
-	  {
+      {
         title: "Latest",
         description:
-          "Check out the position paper titled 'Towards Modeling Augmented Reading in a Phygital Learning System Using Learning Analytics Approaches', presented at CHI Workshop, link here: https://chi-star-workshop.github.io/"
+          "Check out the position paper titled 'Towards Modeling Augmented Reading in a Phygital Learning System Using Learning Analytics Approaches', presented at the CHI STAR workshop.",
+        link: {
+          label: "Open workshop page",
+          url: "https://chi-star-workshop.github.io/"
+        }
       },
       {
         title: "Phygital textbooks and active reading",
@@ -102,7 +106,7 @@ window.siteData = {
     "project-phygital-textbooks",
     "project-active-reading",
     "project-robotub",
-	"project-sentence-sprint"
+    "project-sentence-sprint"
   ],
   publications: [
     {
@@ -359,8 +363,8 @@ window.siteData = {
         "HCI for Educational Technology"
       ],
       outcomes: [
-        "Design Conceptualization for phygital textbooks in classroom learning context",
-		"Presented the initial research explorations and investigation plan at ACM IUI Conference 2023"
+        "Design conceptualization for phygital textbooks in classroom learning contexts",
+        "Presented the initial research explorations and investigation plan at ACM IUI Conference 2023"
         //""
       ],
       image: "assets/images/iui_1.png",
@@ -387,9 +391,9 @@ window.siteData = {
       title: "Active Reading in Smartphone-Based Textbook Companions",
       period: "2024-2025",
       summary:
-        "This project investigates how students read with smartphone-based textbook companions. The insights are based on a study conducted in Indian classroom settings. It was also a comparison with reading on a Laptop.",
+        "This project investigates how students read with smartphone-based textbook companions. The insights are based on a study conducted in Indian classroom settings and compared with reading on a laptop.",
       tags: [
-        "Classroom research", "Academic Reading", "Educational technology evaluation"
+        "Classroom research", "Academic reading", "Educational technology evaluation"
       ],
       outcomes: [
         "Design insights on active reading and companion interfaces",
@@ -399,7 +403,7 @@ window.siteData = {
       alt: "Abstract illustration representing mobile reading and classroom learning activity",
       links: [],
       details: {
-        paragraphs: ["Here, the comparative analysis showed significantly lower percieved cognitive load in students who read the textbook with the smartphone-based companion application than the ones who read on the laptop. More insights are available on the related publication."],
+        paragraphs: ["Here, the comparative analysis showed significantly lower perceived cognitive load in students who read the textbook with the smartphone-based companion application than the ones who read on the laptop. More insights are available in the related publication."],
         images: [
 			{
 				src: "assets/images/using_app.jpeg",
@@ -426,32 +430,36 @@ window.siteData = {
       ],
       image: "assets/images/project-peer-mentors.svg",
       alt: "Abstract illustration representing an adaptive tutoring network for online learning",
-      links: ["https://library.apsce.net/index.php/ICCE/article/view/5938"],
+      links: [
+        { label: "Proceedings", url: "https://library.apsce.net/index.php/ICCE/article/view/5606" }
+      ],
       details: {
         paragraphs: [],
         images: []
       }
     },
-	{
+    {
       id: "project-sentence-sprint",
       title: "Design of a sentence construction game",
       period: "2026",
       summary:
-        "A game that supports your English language learning journey by providing you with a platform to learn sentence construction",
+        "A game that supports English language learning by helping learners practice sentence construction.",
       tags: [
         "Learning experience design",
-        "Language Learning ",
+        "Language learning",
         "HCI for Educational Technology"
       ],
       outcomes: [
-        "Analogous research with the DHH users published at ICCE 2023: Prasad, A., Prajapati, S., & BADHE, V. (2023, December). Design and Development of a Sentence Construction Game for Deaf and Hard of Hearing (DHH) Users: A Qualitative Usability Study. In International Conference on Computers in Education. "
+        "Related research with DHH users was published at ICCE 2023."
         //""
       ],
       image: "assets/images/sentence-p-1.png",
       alt: "Source: Prasad, A., Prajapati, S., & BADHE, V. (2023, December). Design and Development of a Sentence Construction Game for Deaf and Hard of Hearing (DHH) Users: A Qualitative Usability Study. In International Conference on Computers in Education. ",
-      links: [],
+      links: [
+        { label: "Download APK", url: "https://github.com/sunnysideux/sentence-sprint/releases/download/v1.0.0/Sentence.Sprint.apk" }
+      ],
       details: {
-        paragraphs: ["Link to download the app: https://github.com/sunnysideux/sentence-sprint/releases/download/v1.0.0/Sentence.Sprint.apk "],
+        paragraphs: ["The Android APK is available from the project release."],
         images: [
 		    {
 				src: "assets/images/sentence-p-2.png",
@@ -575,12 +583,21 @@ window.siteData = {
     ]
   },
   resources: [
-        {
-        title: "Educational Technology, IIT Bombay",
-        value: "22d1201@iitb.ac.in"
-		}
-
-		],
+    {
+      title: "Educational Technology, IIT Bombay",
+      value: "Centre for Educational Technology",
+      description:
+        "Institutional context for Sunny's doctoral research in educational technology, learning experience design, and classroom-grounded technology studies."
+    },
+    {
+      title: "CHI STAR Workshop",
+      value: "Position paper",
+      description:
+        "Workshop page for the augmented reading position paper highlighted in the research profile.",
+      url: "https://chi-star-workshop.github.io/",
+      linkLabel: "Open workshop page"
+    }
+  ],
   contact: {
     intro:
       "I welcome conversations about educational technology research, learning experience design, HCI in education, and collaborations around classroom technology or design-led research.",
