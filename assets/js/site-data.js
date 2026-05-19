@@ -9,6 +9,7 @@ window.siteData = {
     role: "PhD Candidate",
     location: "Mumbai, India",
     email: "22d1201@iitb.ac.in",
+    scholarUrl: "https://scholar.google.com/citations?user=RWuM4NIAAAAJ&hl=en&oi=ao",
     logoFile: "assets/images/logo-sunny.png",
     logoAlt: "Stylized portrait logo of Sunny Prakash Prajapati",
     bioShort:
@@ -33,8 +34,8 @@ window.siteData = {
         value: "Developing LLM-integrated tools to support academic reading"
       },
       {
-        label: "An unusual skill",
-        value: "I know how to make bath soaps"
+        label: "Design background",
+        value: "Engineering, product design, teaching, and educational technology"
       },
       {
         label: "Awards & Grants",
@@ -368,10 +369,11 @@ window.siteData = {
         //""
       ],
       image: "assets/images/iui_1.png",
-      alt: "Source: Prajapati, S. P., & Das, S. (2023). Designing a Phygital Interface for Textbooks to Support Active Collaborative Learning. Companion Proceedings of the 28th International Conference on Intelligent User Interfaces, 1–4. https://doi.org/10.1145/3581754.3584117 ",
+      alt: "Concept diagram showing a phygital textbook companion interface",
+      citation: "Source: Prajapati, S. P., & Das, S. (2023). Designing a Phygital Interface for Textbooks to Support Active Collaborative Learning. Companion Proceedings of the 28th International Conference on Intelligent User Interfaces.",
       links: [],
       details: {
-        paragraphs: ["Image source: Prajapati, S. P., & Das, S. (2023). Designing a Phygital Interface for Textbooks to Support Active Collaborative Learning. Companion Proceedings of the 28th International Conference on Intelligent User Interfaces, 1–4."],
+        paragraphs: ["This project explored how print textbooks can be extended with digital layers while preserving the affordances of classroom reading and collaborative activity."],
         images: [
 		    {
 				src: "assets/images/iui_2.png",
@@ -407,7 +409,7 @@ window.siteData = {
         images: [
 			{
 				src: "assets/images/using_app.jpeg",
-				alt: "Affordances of print media",
+				alt: "Student reading a textbook with a smartphone companion app",
 				caption: "Snapshots from the pilot study of a learner reading a textbook with a smartphone-based application"
 			},
 		]
@@ -454,7 +456,8 @@ window.siteData = {
         //""
       ],
       image: "assets/images/sentence-p-1.png",
-      alt: "Source: Prasad, A., Prajapati, S., & BADHE, V. (2023, December). Design and Development of a Sentence Construction Game for Deaf and Hard of Hearing (DHH) Users: A Qualitative Usability Study. In International Conference on Computers in Education. ",
+      alt: "Sentence construction game interface screens",
+      citation: "Related publication: Prasad, A., Prajapati, S., & Badhe, V. (2023). Design and Development of a Sentence Construction Game for Deaf and Hard of Hearing Users: A Qualitative Usability Study. International Conference on Computers in Education.",
       links: [
         { label: "Download APK", url: "https://github.com/sunnysideux/sentence-sprint/releases/download/v1.0.0/Sentence.Sprint.apk" }
       ],
@@ -574,7 +577,7 @@ window.siteData = {
   },
   cv: {
     note:
-      "The site now includes the uploaded CV PDF. Replace assets/files/researcher-cv.pdf whenever you have a newer version, and the download button will keep working.",
+      "The downloadable CV PDF includes education, publications, teaching, awards, grants, and academic service.",
     highlights: [
       "PMRF Fellow and PhD Research Scholar in Educational Technology at IIT Bombay",
       "Research on phygital textbooks, active reading, AI-augmented learning interfaces, and usability evaluation",

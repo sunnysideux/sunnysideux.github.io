@@ -11,27 +11,30 @@
   const currentPage = document.body.dataset.page || "home";
 
   const pageMeta = {
-    home: { title: "Home", intro: "Research, publications, projects, and contact information." },
-    about: { title: "About", intro: "Biography, background, affiliation, and research themes." },
-    publications: { title: "Publications", intro: "Selected journal articles, conference papers, workshops, and posters." },
-    projects: { title: "Projects", intro: "Research projects, tags, outcomes, and related links." },
-    teaching: { title: "Teaching", intro: "Courses, workshops, and mentoring." },
-    resources: { title: "Resources", intro: "A small collection of books, websites, and courses worth returning to." },
-    cv: { title: "CV", intro: "Curriculum vitae and downloadable materials." },
-    contact: { title: "Contact", intro: "Ways to get in touch and connect." }
+    home: { title: "Home", intro: "Research, publications, projects, and contact information.", eyebrow: "Research portfolio" },
+    about: { title: "About", intro: "Biography, background, affiliation, and research themes.", eyebrow: "Researcher profile" },
+    publications: { title: "Publications", intro: "Selected journal articles, conference papers, workshops, and posters.", eyebrow: "Scholarly work" },
+    projects: { title: "Projects", intro: "Research projects, design probes, outcomes, and related links.", eyebrow: "Selected work" },
+    teaching: { title: "Teaching", intro: "Courses, workshops, mentoring, honors, and academic service.", eyebrow: "Practice and service" },
+    resources: { title: "Resources", intro: "Selected references, institutional links, and resources connected to the research.", eyebrow: "Useful links" },
+    cv: { title: "CV", intro: "Curriculum vitae, research highlights, and downloadable materials.", eyebrow: "Academic record" },
+    contact: { title: "Contact", intro: "Ways to get in touch for research conversations, collaborations, talks, and advising inquiries.", eyebrow: "Connect" }
   };
 
   const scholarLink =
+    siteData.profile.scholarUrl ||
     (siteData.contact.links.find((item) => item.label === "Google Scholar") || {}).url ||
-    "publications.html";
+    "https://scholar.google.com/citations?user=RWuM4NIAAAAJ&hl=en&oi=ao";
 
   const navigation = [
     { key: "home", label: "Home", href: "index.html" },
+    { key: "about", label: "About", href: "about.html" },
     { key: "projects", label: "Projects", href: "projects.html" },
+    { key: "publications", label: "Publications", href: "publications.html" },
     { key: "teaching", label: "Teaching", href: "teaching.html" },
     { key: "resources", label: "Resources", href: "resources.html" },
-    { key: "contact", label: "Contact", href: "contact.html" },
-	    { key: "publications", label: "Publications", href: scholarLink, external: true }
+    { key: "cv", label: "CV", href: "cv.html" },
+    { key: "contact", label: "Contact", href: "contact.html" }
   ];
 
   const categoryLabels = {
@@ -55,7 +58,6 @@
   renderChrome();
   renderPage();
   bindNavigation();
-  bindProjectCards();
   bindPublications();
   bindContactForm();
 
@@ -149,8 +151,8 @@
             <p class="hero-summary">${siteData.profile.bioShort}</p>
             <div class="button-row">
               <a class="button button-primary" href="projects.html">Explore projects</a>
-              <a class="button button-secondary" href="${scholarLink}" target="_blank" rel="noopener">Browse publications</a>
-              <a class="button button-tertiary" href="${siteData.profile.cvFile}" target="_blank" rel="noopener">Download CV</a>
+              <a class="button button-secondary" href="publications.html">Browse publications</a>
+              <a class="button button-tertiary" href="cv.html">View CV</a>
             </div>
             <div class="tag-list" aria-label="Research interests">
               ${siteData.profile.researchInterests.map((item) => `<span class="tag">${item}</span>`).join("")}
@@ -179,6 +181,8 @@
           </aside>
         </div>
       </section>
+
+      ${renderCredibilityStrip()}
 
       <section class="page-section">
         <div class="container section-grid section-grid-home">
@@ -209,11 +213,22 @@
           </div>
         </div>
       </section>
+
+      <section class="page-section page-section-compact">
+        <div class="container contact-band home-contact-band">
+          <div>
+            <p class="eyebrow">Next conversation</p>
+            <h2>Open to collaborations around learning experience design and classroom technology.</h2>
+          </div>
+          <a class="button button-primary" href="contact.html">Contact Sunny</a>
+        </div>
+      </section>
     `;
   }
 
   function renderAboutPage() {
     return `
+      ${renderPageHeader("about")}
       <section class="page-section">
         <div class="container prose-grid">
           <article class="prose-card">
@@ -290,6 +305,7 @@
     const sortedPublications = [...siteData.publications].sort((a, b) => b.year - a.year);
 
     return `
+      ${renderPageHeader("publications", `<a class="button button-secondary" href="${scholarLink}" target="_blank" rel="noopener">Open Google Scholar</a>`)}
       <section class="page-section">
         <div class="container">
           <div class="publications-toolbar">
@@ -333,6 +349,7 @@
     }
 
     return `
+      ${renderPageHeader("projects")}
       <section class="page-section">
         <div class="container">
           <div class="card-grid card-grid-projects">
@@ -345,6 +362,7 @@
 
   function renderTeachingPage() {
     return `
+      ${renderPageHeader("teaching")}
       <section class="page-section">
         <div class="container teaching-grid">
           ${siteData.teaching.sections.map(renderTeachingSection).join("")}
@@ -357,6 +375,7 @@
     const resources = Array.isArray(siteData.resources) ? siteData.resources : [];
 
     return `
+      ${renderPageHeader("resources")}
       <section class="page-section">
         <div class="container">
           ${
@@ -381,6 +400,7 @@
 
   function renderCvPage() {
     return `
+      ${renderPageHeader("cv", `<a class="button button-secondary" href="${siteData.profile.cvFile}" target="_blank" rel="noopener">Open CV PDF</a>`)}
       <section class="page-section">
         <div class="container cv-grid">
           <article class="card cv-panel">
@@ -403,6 +423,7 @@
 
   function renderContactPage() {
     return `
+      ${renderPageHeader("contact", "", siteData.contact.intro)}
       <section class="page-section">
         <div class="container contact-grid">
           <article class="card contact-card">
@@ -452,7 +473,7 @@
           ${item.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}
         </div>
         <div class="link-row">
-          ${item.links.map((link) => `<a class="text-link" href="${link.url}">${link.label}</a>`).join("")}
+          ${item.links.map((link) => `<a class="text-link" href="${link.url}" target="_blank" rel="noopener">${link.label}</a>`).join("")}
         </div>
       </article>
     `;
@@ -462,7 +483,7 @@
     const href = `projects.html?project=${encodeURIComponent(project.id)}`;
 
     return `
-      <article class="card project-card project-card-clickable" id="${project.id}" role="link" tabindex="0" data-project-card data-project-href="${href}" aria-label="Open project: ${project.title}">
+      <article class="card project-card" id="${project.id}">
         <div class="project-image">
           <img src="${project.image}" alt="${project.alt}">
         </div>
@@ -473,9 +494,8 @@
           </div>
           <h3>${project.title}</h3>
           <p>${project.summary}</p>
-          ${renderProjectOutcomes(project)}
-          ${renderProjectTags(project)}
-          ${renderProjectLinks(project)}
+          ${renderProjectPrimaryOutcome(project)}
+          <a class="text-link project-card-link" href="${href}">View project</a>
         </div>
       </article>
     `;
@@ -484,6 +504,7 @@
   function renderProjectDetail(project) {
     const detailParagraphs = ((project.details || {}).paragraphs || []).filter(Boolean);
     const detailImages = ((project.details || {}).images || []).filter((image) => image && image.src);
+    const citation = project.citation ? `<p class="project-citation">${project.citation}</p>` : "";
 
     return `
       <section class="page-section">
@@ -501,6 +522,7 @@
                 <h1>${project.title}</h1>
                 <p>${project.summary}</p>
                 ${detailParagraphs.map((paragraph) => `<p>${paragraph}</p>`).join("")}
+                ${citation}
               </div>
             </div>
             ${renderProjectOutcomes(project)}
@@ -534,6 +556,58 @@
           <a class="text-link" href="projects.html">Back to projects</a>
         </div>
       </section>
+    `;
+  }
+
+  function renderPageHeader(pageKey, actions = "", introOverride = "") {
+    const meta = pageMeta[pageKey] || pageMeta.home;
+    const intro = introOverride || meta.intro;
+
+    return `
+      <section class="page-hero">
+        <div class="container page-hero-inner">
+          <p class="eyebrow">${meta.eyebrow || meta.title}</p>
+          <h1>${meta.title}</h1>
+          <p>${intro}</p>
+          ${actions ? `<div class="page-actions">${actions}</div>` : ""}
+        </div>
+      </section>
+    `;
+  }
+
+  function renderCredibilityStrip() {
+    const facts = siteData.profile.quickFacts.filter((fact) => fact.label !== "An unusual skill");
+
+    return `
+      <section class="credibility-strip" aria-label="Research credibility">
+        <div class="container credibility-grid">
+          ${facts
+            .map(
+              (fact) => `
+                <div class="credibility-item">
+                  <span>${fact.label}</span>
+                  <strong>${fact.value}</strong>
+                </div>
+              `
+            )
+            .join("")}
+        </div>
+      </section>
+    `;
+  }
+
+  function renderProjectPrimaryOutcome(project) {
+    const outcomes = Array.isArray(project.outcomes) ? project.outcomes.filter(Boolean) : [];
+
+    if (!outcomes.length) {
+      return "";
+    }
+
+    return `
+      <p class="project-primary-outcome">
+        <span>Outcome</span>
+        ${outcomes[0]}
+      </p>
     `;
   }
 
@@ -572,7 +646,9 @@
   }
 
   function renderProjectLinks(project) {
-    const links = Array.isArray(project.links) ? project.links.filter((link) => link && link.url && link.label) : [];
+    const links = Array.isArray(project.links)
+      ? project.links.map(normalizeProjectLink).filter((link) => link && link.url && link.label)
+      : [];
 
     if (!links.length) {
       return "";
@@ -590,6 +666,14 @@
 
   function renderProjectLink(link) {
     return `<a class="text-link" href="${link.url}" target="_blank" rel="noopener" data-project-link>${link.label}</a>`;
+  }
+
+  function normalizeProjectLink(link) {
+    if (typeof link === "string") {
+      return { label: "Open link", url: link };
+    }
+
+    return link;
   }
 
   function renderProjectDetailImage(image) {
@@ -691,37 +775,6 @@
         nav.classList.remove("is-open");
         toggle.setAttribute("aria-expanded", "false");
         document.body.classList.remove("nav-open");
-      });
-    });
-  }
-
-  function bindProjectCards() {
-    document.querySelectorAll("[data-project-card]").forEach((card) => {
-      const href = card.getAttribute("data-project-href");
-
-      if (!href) {
-        return;
-      }
-
-      card.addEventListener("click", function (event) {
-        if (event.target.closest("a")) {
-          return;
-        }
-
-        window.location.href = href;
-      });
-
-      card.addEventListener("keydown", function (event) {
-        if (event.key !== "Enter" && event.key !== " ") {
-          return;
-        }
-
-        if (event.target.closest("a")) {
-          return;
-        }
-
-        event.preventDefault();
-        window.location.href = href;
       });
     });
   }
