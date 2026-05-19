@@ -469,12 +469,6 @@
         <p class="publication-authors">${item.authors}</p>
         <p class="publication-venue">${item.venue}</p>
         <p>${item.abstract}</p>
-        <div class="tag-list">
-          ${item.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}
-        </div>
-        <div class="link-row">
-          ${item.links.map((link) => `<a class="text-link" href="${link.url}" target="_blank" rel="noopener">${link.label}</a>`).join("")}
-        </div>
       </article>
     `;
   }
