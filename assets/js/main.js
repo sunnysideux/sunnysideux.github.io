@@ -12,13 +12,11 @@
 
   const pageMeta = {
     home: { title: "Home", intro: "Research, publications, projects, and contact information.", eyebrow: "Research portfolio" },
-    about: { title: "About", intro: "Biography, background, affiliation, and research themes.", eyebrow: "Researcher profile" },
+    about: { title: "About", intro: "Biography, education, research interests, CV, and honors.", eyebrow: "Researcher profile" },
     publications: { title: "Publications", intro: "Selected journal articles, conference papers, workshops, and posters.", eyebrow: "Scholarly work" },
     projects: { title: "Projects", intro: "Research projects, design probes, outcomes, and related links.", eyebrow: "Selected work" },
-    teaching: { title: "Teaching", intro: "Courses, workshops, mentoring, honors, and academic service.", eyebrow: "Practice and service" },
-    resources: { title: "Resources", intro: "Selected references, institutional links, and resources connected to the research.", eyebrow: "Useful links" },
-    cv: { title: "CV", intro: "Curriculum vitae, research highlights, and downloadable materials.", eyebrow: "Academic record" },
-    contact: { title: "Contact", intro: "Ways to get in touch for research conversations, collaborations, talks, and advising inquiries.", eyebrow: "Connect" }
+    teaching: { title: "Teaching", intro: "Courses, workshops, and professional experience.", eyebrow: "Practice" },
+    contact: { title: "Contact", intro: "Ways to get in touch for research conversations, collaborations, talks, and advising inquiries.", eyebrow: "" }
   };
 
   const scholarLink =
@@ -26,14 +24,12 @@
     (siteData.contact.links.find((item) => item.label === "Google Scholar") || {}).url ||
     "https://scholar.google.com/citations?user=RWuM4NIAAAAJ&hl=en&oi=ao";
 
+  /* ── Navigation: 6 items, CV and Resources removed ── */
   const navigation = [
     { key: "home", label: "Home", href: "index.html" },
-    { key: "about", label: "About", href: "about.html" },
     { key: "projects", label: "Projects", href: "projects.html" },
     { key: "publications", label: "Publications", href: "publications.html" },
     { key: "teaching", label: "Teaching", href: "teaching.html" },
-    { key: "resources", label: "Resources", href: "resources.html" },
-    { key: "cv", label: "CV", href: "cv.html" },
     { key: "contact", label: "Contact", href: "contact.html" }
   ];
 
@@ -45,9 +41,24 @@
     poster: "Posters"
   };
 
-  const featuredProjects = siteData.projects.filter((item) =>
-    siteData.featuredProjectIds.includes(item.id)
-  );
+  const categoryClass = {
+    "journal article": "is-journal",
+    "conference paper": "is-conference",
+    "workshop paper": "is-workshop",
+    "poster": "is-poster"
+  };
+
+  const categoryLabel = {
+    "journal article": "Journal article",
+    "conference paper": "Conference paper",
+    "workshop paper": "Workshop paper",
+    "poster": "Poster"
+  };
+
+  const featuredProjects = siteData.projects
+    .filter((item) => siteData.featuredProjectIds.includes(item.id))
+    .slice(0, 4);
+
   const profileInitials = siteData.profile.name
     .split(" ")
     .filter(Boolean)
@@ -59,19 +70,20 @@
   renderPage();
   bindNavigation();
   bindPublications();
-  bindContactForm();
 
+  /* ─────────────────────────────────────────────────────
+     Chrome (header + footer)
+  ───────────────────────────────────────────────────── */
   function renderChrome() {
     if (headerRoot) {
       headerRoot.innerHTML = `
         <div class="container header-inner">
           <a class="brand" href="index.html" aria-label="Go to home page">
             <span class="brand-media">
-              ${
-                siteData.profile.logoFile
-                  ? `<img class="brand-logo" src="${siteData.profile.logoFile}" alt="${siteData.profile.logoAlt || siteData.profile.name}">`
-                  : `<span class="brand-mark">${profileInitials}</span>`
-              }
+              ${siteData.profile.logoFile
+          ? `<img class="brand-logo" src="${siteData.profile.logoFile}" alt="${siteData.profile.logoAlt || siteData.profile.name}">`
+          : `<span class="brand-mark">${profileInitials}</span>`
+        }
             </span>
             <span class="brand-copy">
               <span class="brand-name">${siteData.profile.name}</span>
@@ -86,14 +98,14 @@
           </button>
           <nav class="site-nav" id="site-nav" aria-label="Primary">
             ${navigation
-              .map(
-                (item) => `
-                  <a href="${item.href}" ${item.key === currentPage ? 'aria-current="page"' : ""} ${item.external ? 'target="_blank" rel="noopener"' : ""}>
+          .map(
+            (item) => `
+                  <a href="${item.href}" ${item.key === currentPage ? 'aria-current="page"' : ""}>
                     ${item.label}
                   </a>
                 `
-              )
-              .join("")}
+          )
+          .join("")}
           </nav>
         </div>
       `;
@@ -104,10 +116,11 @@
         <div class="container footer-inner">
           <div class="footer-copy">
             <p class="footer-title">${siteData.profile.name}</p>
-            <p>${siteData.profile.role} / ${siteData.profile.affiliation}</p>
+            <p>${siteData.profile.role} · ${siteData.profile.affiliation}</p>
             <p class="footer-license">Code licensed under <a href="LICENSE">GPL-3.0</a>.</p>
           </div>
           <div class="footer-links">
+            <a href="about.html">About</a>
             <a href="contact.html">Contact</a>
           </div>
         </div>
@@ -115,6 +128,9 @@
     }
   }
 
+  /* ─────────────────────────────────────────────────────
+     Router
+  ───────────────────────────────────────────────────── */
   function renderPage() {
     if (!pageRoot) {
       return;
@@ -136,68 +152,54 @@
       return;
     }
 
-    document.title = `${pageMeta[currentPage].title} | ${siteData.profile.name}`;
+    const meta = pageMeta[currentPage] || pageMeta.home;
+    document.title = `${meta.title} | ${siteData.profile.name}`;
     pageRoot.innerHTML = renderer();
   }
 
+  /* ─────────────────────────────────────────────────────
+     Home
+     · Bio + quick facts hero
+     · Credibility strip
+     · Featured publications (3 cards)
+     · Featured projects
+     · Contact band
+  ───────────────────────────────────────────────────── */
   function renderHomePage() {
     return `
       <section class="hero">
         <div class="container hero-grid">
           <div class="hero-copy">
-            <p class="eyebrow">PhD Researcher / IIT Bombay</p>
             <h1>${siteData.profile.name}</h1>
             <p class="hero-tagline">${siteData.profile.tagline}</p>
             <p class="hero-summary">${siteData.profile.bioShort}</p>
             <div class="button-row">
-              <a class="button button-primary" href="projects.html">Explore projects</a>
+              <a class="button button-primary"   href="projects.html">Explore projects</a>
               <a class="button button-secondary" href="publications.html">Browse publications</a>
-              <a class="button button-tertiary" href="cv.html">View CV</a>
-            </div>
-            <div class="tag-list" aria-label="Research interests">
-              ${siteData.profile.researchInterests.map((item) => `<span class="tag">${item}</span>`).join("")}
+              <a class="button button-secondary" href="${siteData.profile.cvFile}" target="_blank" rel="noopener">Download CV</a>
             </div>
           </div>
           <aside class="hero-panel" aria-label="Research snapshot">
-            <p class="panel-kicker">Current profile</p>
+            ${siteData.profile.logoFile ? `<img class="profile-photo" src="${siteData.profile.logoFile}" alt="${siteData.profile.logoAlt || siteData.profile.name}" loading="eager">` : ""}
             <h2>${siteData.profile.role}</h2>
             <p class="panel-affiliation">${siteData.profile.affiliation}</p>
             <ul class="detail-list">
               ${siteData.profile.quickFacts
-                .map(
-                  (fact) => `
+        .map(
+          (fact) => `
                     <li>
-                      <span>${fact.label}</span>
                       <strong>${fact.value}</strong>
                     </li>
                   `
-                )
-                .join("")}
+        )
+        .join("")}
             </ul>
-            <div class="hero-contact-links">
-              <a href="mailto:${siteData.profile.email}">${siteData.profile.email}</a>
-              <span>${siteData.profile.location}</span>
-            </div>
+
           </aside>
         </div>
       </section>
 
-      ${renderCredibilityStrip()}
-
-      <section class="page-section">
-        <div class="container section-grid section-grid-home">
-          <div class="section-intro">
-            <p class="eyebrow">Research profile</p>
-            <h2>Designing learning experiences that fit real classrooms.</h2>
-            <p>${siteData.about.pageIntro}</p>
-          </div>
-          <div class="key-points">
-            ${siteData.about.themes
-              .map((theme) => renderThemeCard(theme, "card subtle-card"))
-              .join("")}
-          </div>
-        </div>
-      </section>
+      ${renderFeaturedPublications()}
 
       <section class="page-section">
         <div class="container">
@@ -215,126 +217,54 @@
       </section>
 
       <section class="page-section page-section-compact">
-        <div class="container contact-band home-contact-band">
-          <div>
-            <p class="eyebrow">Next conversation</p>
-            <h2>Open to collaborations around learning experience design and classroom technology.</h2>
-          </div>
-          <a class="button button-primary" href="contact.html">Contact Sunny</a>
-        </div>
-      </section>
-    `;
-  }
-
-  function renderAboutPage() {
-    return `
-      ${renderPageHeader("about")}
-      <section class="page-section">
-        <div class="container prose-grid">
-          <article class="prose-card">
-            <h2>Biography</h2>
-            ${siteData.profile.bioLong.map((paragraph) => `<p>${paragraph}</p>`).join("")}
-            <p>${siteData.about.background}</p>
+        <div class="container">
+          <article class="card contact-band home-contact-band">
+            <div>
+              <p class="eyebrow">Next conversation</p>
+              <h2>Open to collaborations around learning experience design and classroom technology.</h2>
+            </div>
+            <a class="button button-primary" href="contact.html">Get in touch</a>
           </article>
-          <aside class="prose-sidebar">
-            <article class="card">
-              <p class="eyebrow">Current affiliation</p>
-              <h2>${siteData.profile.affiliation}</h2>
-              <p>${siteData.about.currentAffiliation}</p>
-            </article>
-            <article class="card">
-              <p class="eyebrow">Research interests</p>
-              <div class="tag-list">
-                ${siteData.profile.researchInterests.map((item) => `<span class="tag">${item}</span>`).join("")}
-              </div>
-            </article>
-          </aside>
-        </div>
-      </section>
-
-      <section class="page-section section-tinted">
-        <div class="container">
-          <div class="section-header">
-            <div>
-              <p class="eyebrow">Background</p>
-              <h2>Education</h2>
-            </div>
-          </div>
-          <div class="timeline">
-            ${siteData.about.education
-              .map(
-                (item) => `
-                  <article class="timeline-item">
-                    <span class="timeline-period">${item.period}</span>
-                    <div>
-                      <h3>${item.degree}</h3>
-                      <p class="timeline-institution">${item.institution}</p>
-                      <p>${item.detail}</p>
-                    </div>
-                  </article>
-                `
-              )
-              .join("")}
-          </div>
-        </div>
-      </section>
-
-      <section class="page-section">
-        <div class="container">
-          <div class="section-header">
-            <div>
-              <p class="eyebrow">Themes</p>
-              <h2>Core research directions</h2>
-            </div>
-          </div>
-          <div class="card-grid">
-            ${siteData.about.themes
-              .map((theme) => renderThemeCard(theme, "card"))
-              .join("")}
-          </div>
         </div>
       </section>
     `;
   }
 
+  /* ─────────────────────────────────────────────────────
+     About
+     · Long bio + background
+     · Sidebar: research interests chips, CV download,
+                honors & awards, lab resource links
+     · Education timeline
+     · Research themes grid
+  ───────────────────────────────────────────────────── */
+  function renderAboutPage() {
+    window.location.replace("index.html");
+    return "";
+  }
+
+  /* ─────────────────────────────────────────────────────
+     Publications
+  ───────────────────────────────────────────────────── */
   function renderPublicationsPage() {
-    const categories = [
-      "all",
-      ...new Set(siteData.publications.map((item) => item.category))
-    ];
-    const sortedPublications = [...siteData.publications].sort((a, b) => b.year - a.year);
-
     return `
-      ${renderPageHeader("publications", `<a class="button button-secondary" href="${scholarLink}" target="_blank" rel="noopener">Open Google Scholar</a>`)}
+      ${renderPageHeader("publications")}
       <section class="page-section">
-        <div class="container">
-          <div class="publications-toolbar">
-            <label class="search-field" for="publication-search">
-              <span class="sr-only">Search publications</span>
-              <input id="publication-search" type="search" placeholder="Search by title, author, venue, year, or tag" data-publication-search>
-            </label>
-            <div class="filter-group" aria-label="Publication categories">
-              ${categories
-                .map(
-                  (category) => `
-                    <button class="filter-chip${category === "all" ? " is-active" : ""}" type="button" data-filter="${category}" aria-pressed="${category === "all"}">
-                      ${categoryLabels[category] || category}
-                    </button>
-                  `
-                )
-                .join("")}
-            </div>
-          </div>
-          <p class="results-note" data-results-count aria-live="polite">${sortedPublications.length} publications shown</p>
-          <div class="stack-list" data-publications-list>
-            ${sortedPublications.map(renderPublicationCard).join("")}
-          </div>
-          <p class="empty-state" data-publications-empty hidden>No publications match the current search and filter.</p>
+        <div class="container single-card-container">
+          <article class="card scholar-card">
+            <p class="eyebrow">Scholarly output</p>
+            <h2>Research publications</h2>
+            <p>All journal articles, conference papers, workshop papers, and posters are listed on Google Scholar, including citation metrics and full-text links.</p>
+            <a class="button button-primary" href="${scholarLink}" target="_blank" rel="noopener">Open Google Scholar</a>
+          </article>
         </div>
       </section>
     `;
   }
 
+  /* ─────────────────────────────────────────────────────
+     Projects
+  ───────────────────────────────────────────────────── */
   function renderProjectsPage() {
     const projectId = new URLSearchParams(window.location.search).get("project");
 
@@ -345,6 +275,7 @@
         return renderProjectNotFound();
       }
 
+      document.title = `${project.title} | ${siteData.profile.name}`;
       return renderProjectDetail(project);
     }
 
@@ -360,86 +291,57 @@
     `;
   }
 
+  /* ─────────────────────────────────────────────────────
+     Teaching — honors section excluded (moved to About)
+  ───────────────────────────────────────────────────── */
   function renderTeachingPage() {
+    const teachingSections = (siteData.teaching.sections || []).filter(
+      (section) => section.eyebrow !== "Recognition"
+    );
+
     return `
       ${renderPageHeader("teaching")}
       <section class="page-section">
         <div class="container teaching-grid">
-          ${siteData.teaching.sections.map(renderTeachingSection).join("")}
+          ${teachingSections.map(renderTeachingSection).join("")}
         </div>
       </section>
     `;
   }
 
+  /* ─────────────────────────────────────────────────────
+     Redirect stubs (CV and Resources now live in About)
+  ───────────────────────────────────────────────────── */
   function renderResourcesPage() {
-    const resources = Array.isArray(siteData.resources) ? siteData.resources : [];
-
-    return `
-      ${renderPageHeader("resources")}
-      <section class="page-section">
-        <div class="container">
-          ${
-            resources.length
-              ? `
-                <div class="resources-grid">
-                  ${resources.map(renderResourceItem).join("")}
-                </div>
-              `
-              : `
-                <article class="card resources-empty">
-                  <p class="eyebrow">Coming soon</p>
-                  <h2>Recommendations will live here.</h2>
-                  <p>Add items to <code>assets/js/site-data.js</code> under <code>resources</code> to publish books, websites, and courses on this page.</p>
-                </article>
-              `
-          }
-        </div>
-      </section>
-    `;
+    window.location.replace("about.html");
+    return "";
   }
 
   function renderCvPage() {
-    return `
-      ${renderPageHeader("cv", `<a class="button button-secondary" href="${siteData.profile.cvFile}" target="_blank" rel="noopener">Open CV PDF</a>`)}
-      <section class="page-section">
-        <div class="container cv-grid">
-          <article class="card cv-panel">
-            <p class="eyebrow">Download</p>
-            <h2>Curriculum vitae</h2>
-            <p>${siteData.cv.note}</p>
-            <a class="button button-primary" href="${siteData.profile.cvFile}" target="_blank" rel="noopener">Open CV PDF</a>
-          </article>
-          <article class="card">
-            <p class="eyebrow">Highlights</p>
-            <h2>At a glance</h2>
-            <ul class="bullet-list">
-              ${siteData.cv.highlights.map((item) => `<li>${item}</li>`).join("")}
-            </ul>
-          </article>
-        </div>
-      </section>
-    `;
+    window.location.replace("about.html");
+    return "";
   }
 
+  /* ─────────────────────────────────────────────────────
+     Contact
+  ───────────────────────────────────────────────────── */
   function renderContactPage() {
     return `
       ${renderPageHeader("contact", "", siteData.contact.intro)}
       <section class="page-section">
-        <div class="container contact-grid">
+        <div class="container single-card-container">
           <article class="card contact-card">
-            <p class="eyebrow">Reach out</p>
-            <h2>Contact links</h2>
             <div class="contact-list">
               ${siteData.contact.links
-                .map(
-                  (item) => `
+        .map(
+          (item) => `
                     <a class="contact-item" href="${item.url}" target="${item.url.startsWith("mailto:") ? "_self" : "_blank"}" rel="noopener">
                       <span>${item.label}</span>
                       <strong>${item.value}</strong>
                     </a>
                   `
-                )
-                .join("")}
+        )
+        .join("")}
             </div>
           </article>
         </div>
@@ -447,6 +349,9 @@
     `;
   }
 
+  /* ─────────────────────────────────────────────────────
+     Simple / error page
+  ───────────────────────────────────────────────────── */
   function renderSimplePage(title, intro) {
     return `
       <section class="page-section simple-page">
@@ -458,46 +363,119 @@
     `;
   }
 
-  function renderPublicationCard(item) {
+  /* ─────────────────────────────────────────────────────
+     Featured publications strip (Home page)
+  ───────────────────────────────────────────────────── */
+  function renderFeaturedPublications() {
+    const featured = siteData.publications.filter((pub) =>
+      (siteData.featuredPublicationIds || []).includes(pub.id)
+    );
+
+    if (!featured.length) return "";
+
     return `
-      <article class="card publication-card" data-publication-item data-category="${item.category}" data-search="${createPublicationSearchText(item)}">
-        <div class="publication-meta">
-          <span class="publication-badge">${categoryLabels[item.category] || item.category}</span>
-          <span class="publication-year">${item.year}</span>
+      <section class="page-section page-section-compact" aria-label="Recent publications">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Scholarly work</p>
+              <h2>Recent publications</h2>
+            </div>
+            <a class="text-link" href="publications.html">All publications</a>
+          </div>
+          <div class="featured-pub-list">
+            ${featured.map(renderFeaturedPubCard).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function renderFeaturedPubCard(item) {
+    const cls = categoryClass[item.category] || "is-conference";
+    const label = categoryLabel[item.category] || item.category;
+    const link = item.links && item.links[0];
+
+    return `
+      <article class="featured-pub-card">
+        <div class="featured-pub-meta">
+          <span class="publication-category ${cls}">${label}</span>
+          <span class="featured-pub-year">${item.year}</span>
         </div>
         <h3>${item.title}</h3>
-        <p class="publication-authors">${item.authors}</p>
         <p class="publication-venue">${item.venue}</p>
-        <p>${item.abstract}</p>
+        ${link ? `<a class="text-link featured-pub-link" href="${link.url}" target="_blank" rel="noopener">${link.label}</a>` : ""}
       </article>
     `;
   }
 
+  /* ─────────────────────────────────────────────────────
+     Publication card (full listing page)
+  ───────────────────────────────────────────────────── */
+  function renderPublicationCard(item) {
+    const cls = categoryClass[item.category] || "is-conference";
+    const label = categoryLabel[item.category] || item.category;
+
+    const linksHtml =
+      item.links && item.links.length
+        ? `<div class="link-row publication-links">
+            ${item.links
+          .map(
+            (link) =>
+              `<a class="button button-secondary publication-link-btn" href="${link.url}" target="_blank" rel="noopener">${link.label}</a>`
+          )
+          .join("")}
+           </div>`
+        : "";
+
+    const tagsHtml =
+      item.tags && item.tags.length
+        ? `<div class="tag-list publication-tag-list">
+            ${item.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}
+           </div>`
+        : "";
+
+    return `
+      <article class="card publication-card" data-publication-item data-category="${item.category}" data-search="${createPublicationSearchText(item)}">
+        <span class="publication-category ${cls}">${label}</span>
+        <h3>${item.title}</h3>
+        <p class="publication-authors">${item.authors}</p>
+        <p class="publication-venue">${item.venue} <span class="publication-year">(${item.year})</span></p>
+        ${tagsHtml}
+        <details class="publication-abstract">
+          <summary>Abstract</summary>
+          <p>${item.abstract}</p>
+        </details>
+        ${linksHtml}
+      </article>
+    `;
+  }
+
+  /* ─────────────────────────────────────────────────────
+     Project card (grid)
+  ───────────────────────────────────────────────────── */
   function renderProjectCard(project) {
     const href = `projects.html?project=${encodeURIComponent(project.id)}`;
 
     return `
       <article class="card project-card" id="${project.id}">
         <div class="project-image">
-          <img src="${project.image}" alt="${project.alt}">
+          <img src="${project.image}" alt="${project.alt}" loading="lazy">
         </div>
         <div class="project-body">
-          <div class="project-meta">
-            <span class="publication-badge">Research project</span>
-            <span>${project.period}</span>
-          </div>
-          <h3>${project.title}</h3>
+          <h3><a class="project-card-heading-link" href="${href}">${project.title}</a></h3>
           <p>${project.summary}</p>
-          ${renderProjectPrimaryOutcome(project)}
-          <a class="text-link project-card-link" href="${href}">View project</a>
         </div>
       </article>
     `;
   }
 
+  /* ─────────────────────────────────────────────────────
+     Project detail page
+  ───────────────────────────────────────────────────── */
   function renderProjectDetail(project) {
     const detailParagraphs = ((project.details || {}).paragraphs || []).filter(Boolean);
-    const detailImages = ((project.details || {}).images || []).filter((image) => image && image.src);
+    const detailImages = ((project.details || {}).images || []).filter((img) => img && img.src);
     const citation = project.citation ? `<p class="project-citation">${project.citation}</p>` : "";
 
     return `
@@ -509,22 +487,18 @@
                 <img src="${project.image}" alt="${project.alt}">
               </div>
               <div class="project-detail-copy">
-                <div class="project-meta">
-                  <span class="publication-badge">Research project</span>
-                  <span>${project.period}</span>
-                </div>
                 <h1>${project.title}</h1>
+                <p class="project-period">${project.period}</p>
                 <p>${project.summary}</p>
-                ${detailParagraphs.map((paragraph) => `<p>${paragraph}</p>`).join("")}
+                ${detailParagraphs.map((p) => `<p>${p}</p>`).join("")}
                 ${citation}
               </div>
             </div>
             ${renderProjectOutcomes(project)}
             ${renderProjectTags(project)}
             ${renderProjectLinks(project)}
-            ${
-              detailImages.length
-                ? `
+            ${detailImages.length
+        ? `
                   <section class="project-detail-section">
                     <h2>Photos</h2>
                     <div class="project-gallery">
@@ -532,8 +506,8 @@
                     </div>
                   </section>
                 `
-              : ""
-            }
+        : ""
+      }
           </article>
           <a class="text-link project-back-link" href="projects.html">Back to projects</a>
         </div>
@@ -553,6 +527,9 @@
     `;
   }
 
+  /* ─────────────────────────────────────────────────────
+     Page header (inner pages)
+  ───────────────────────────────────────────────────── */
   function renderPageHeader(pageKey, actions = "", introOverride = "") {
     const meta = pageMeta[pageKey] || pageMeta.home;
     const intro = introOverride || meta.intro;
@@ -569,48 +546,40 @@
     `;
   }
 
+  /* ─────────────────────────────────────────────────────
+     Credibility strip
+  ───────────────────────────────────────────────────── */
   function renderCredibilityStrip() {
-    const facts = siteData.profile.quickFacts.filter((fact) => fact.label !== "An unusual skill");
+    const pubCount = siteData.publications.length;
+    const stripItems = [
+      { label: " ", value: " " },
+      { label: " ", value: " " }
+    ];
 
     return `
-      <section class="credibility-strip" aria-label="Research credibility">
+      <section class="credibility-strip" aria-label="Research output">
         <div class="container credibility-grid">
-          ${facts
-            .map(
-              (fact) => `
+          ${stripItems
+        .map(
+          (item) => `
                 <div class="credibility-item">
-                  <span>${fact.label}</span>
-                  <strong>${fact.value}</strong>
+                  <span>${item.label}</span>
+                  <strong>${item.value}</strong>
                 </div>
               `
-            )
-            .join("")}
+        )
+        .join("")}
         </div>
       </section>
     `;
   }
 
-  function renderProjectPrimaryOutcome(project) {
-    const outcomes = Array.isArray(project.outcomes) ? project.outcomes.filter(Boolean) : [];
-
-    if (!outcomes.length) {
-      return "";
-    }
-
-    return `
-      <p class="project-primary-outcome">
-        <span>Outcome</span>
-        ${outcomes[0]}
-      </p>
-    `;
-  }
-
+  /* ─────────────────────────────────────────────────────
+     Project detail sub-sections
+  ───────────────────────────────────────────────────── */
   function renderProjectOutcomes(project) {
     const outcomes = Array.isArray(project.outcomes) ? project.outcomes.filter(Boolean) : [];
-
-    if (!outcomes.length) {
-      return "";
-    }
+    if (!outcomes.length) return "";
 
     return `
       <section class="project-subsection">
@@ -624,10 +593,7 @@
 
   function renderProjectTags(project) {
     const tags = Array.isArray(project.tags) ? project.tags.filter(Boolean) : [];
-
-    if (!tags.length) {
-      return "";
-    }
+    if (!tags.length) return "";
 
     return `
       <section class="project-subsection">
@@ -643,10 +609,7 @@
     const links = Array.isArray(project.links)
       ? project.links.map(normalizeProjectLink).filter((link) => link && link.url && link.label)
       : [];
-
-    if (!links.length) {
-      return "";
-    }
+    if (!links.length) return "";
 
     return `
       <section class="project-subsection">
@@ -663,43 +626,38 @@
   }
 
   function normalizeProjectLink(link) {
-    if (typeof link === "string") {
-      return { label: "Open link", url: link };
-    }
-
-    return link;
+    return typeof link === "string" ? { label: "Open link", url: link } : link;
   }
 
   function renderProjectDetailImage(image) {
     return `
       <figure class="project-gallery-item">
-        <img src="${image.src}" alt="${image.alt || ""}">
+        <img src="${image.src}" alt="${image.alt || ""}" loading="lazy">
         ${image.caption ? `<figcaption>${image.caption}</figcaption>` : ""}
       </figure>
     `;
   }
 
+  /* ─────────────────────────────────────────────────────
+     Teaching section card
+  ───────────────────────────────────────────────────── */
   function renderTeachingSection(section) {
     return `
-      <section class="teaching-column">
-        <div class="section-header section-header-compact">
-          <div>
-            <h2>${section.title}</h2>
-          </div>
-        </div>
-        <div class="stack-list">
+      <article class="card teaching-section-card">
+        <h2>${section.title}</h2>
+        <div class="teaching-list">
           ${section.items
-            .map(
-              (item) => `
-                <article class="card teaching-card">
+        .map(
+          (item) => `
+                <article class="teaching-item">
                   <h3>${item.title}</h3>
                   <p>${formatTeachingItemText(item)}</p>
                 </article>
               `
-            )
-            .join("")}
+        )
+        .join("")}
         </div>
-      </section>
+      </article>
     `;
   }
 
@@ -708,39 +666,18 @@
     const term = (item.term || "").trim();
     const description = (item.description || "").trim();
     const metadata = [role, term].filter(Boolean).join(", ");
-
-    if (metadata && description) {
-      return `${metadata}. ${description}`;
-    }
-
+    if (metadata && description) return `${metadata}. ${description}`;
     return metadata || description;
   }
 
-  function renderResourceItem(item) {
-    const hasUrl = Boolean(item.url);
-    const tagName = hasUrl ? "a" : "article";
-    const externalAttributes = isExternalResourceLink(item.url) ? 'target="_blank" rel="noopener"' : "";
-    const hrefAttribute = hasUrl ? `href="${item.url}" ${externalAttributes}` : "";
-    const className = `resource-item${hasUrl ? " is-linked" : ""}`;
-    const value = item.value ? `<p class="resource-value">${item.value}</p>` : "";
-    const description = item.description ? `<p>${item.description}</p>` : "";
-    const action = hasUrl ? `<span class="resource-action">${item.linkLabel || "Open resource"}</span>` : "";
-
-    return `
-      <${tagName} class="${className}" ${hrefAttribute}>
-        <span class="publication-badge">${item.badge || "Resource"}</span>
-        <h3>${item.title}</h3>
-        ${value}
-        ${description}
-        ${action}
-      </${tagName}>
-    `;
-  }
-
+  /* ─────────────────────────────────────────────────────
+     Theme card
+  ───────────────────────────────────────────────────── */
   function renderThemeCard(theme, className) {
-    const link = theme.link && theme.link.url
-      ? ` <a class="inline-link" href="${theme.link.url}" target="_blank" rel="noopener">${theme.link.label || "Read more"}</a>`
-      : "";
+    const link =
+      theme.link && theme.link.url
+        ? ` <a class="inline-link" href="${theme.link.url}" target="_blank" rel="noopener">${theme.link.label || "Read more"}</a>`
+        : "";
 
     return `
       <article class="${className}">
@@ -750,13 +687,14 @@
     `;
   }
 
+  /* ─────────────────────────────────────────────────────
+     Interaction: navigation (mobile toggle + Escape)
+  ───────────────────────────────────────────────────── */
   function bindNavigation() {
     const toggle = document.querySelector(".nav-toggle");
     const nav = document.querySelector(".site-nav");
 
-    if (!toggle || !nav) {
-      return;
-    }
+    if (!toggle || !nav) return;
 
     toggle.addEventListener("click", function () {
       const isOpen = nav.classList.toggle("is-open");
@@ -771,8 +709,20 @@
         document.body.classList.remove("nav-open");
       });
     });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && nav.classList.contains("is-open")) {
+        nav.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+        document.body.classList.remove("nav-open");
+        toggle.focus();
+      }
+    });
   }
 
+  /* ─────────────────────────────────────────────────────
+     Interaction: publications search + filter
+  ───────────────────────────────────────────────────── */
   function bindPublications() {
     const searchField = document.querySelector("[data-publication-search]");
     const filterButtons = document.querySelectorAll("[data-filter]");
@@ -791,17 +741,14 @@
       let visibleCount = 0;
 
       publicationItems.forEach((item) => {
-        const category = item.getAttribute("data-category");
-        const searchableText = item.getAttribute("data-search") || "";
-        const categoryMatch = activeFilter === "all" || activeFilter === category;
-        const queryMatch = !query || searchableText.includes(query);
+        const cat = item.getAttribute("data-category");
+        const searchable = item.getAttribute("data-search") || "";
+        const categoryMatch = activeFilter === "all" || activeFilter === cat;
+        const queryMatch = !query || searchable.includes(query);
         const isVisible = categoryMatch && queryMatch;
 
         item.hidden = !isVisible;
-
-        if (isVisible) {
-          visibleCount += 1;
-        }
+        if (isVisible) visibleCount += 1;
       });
 
       resultsCount.textContent = `${visibleCount} publication${visibleCount === 1 ? "" : "s"} shown`;
@@ -813,40 +760,23 @@
     filterButtons.forEach((button) => {
       button.addEventListener("click", function () {
         activeFilter = button.getAttribute("data-filter") || "all";
-
         filterButtons.forEach((item) => {
           item.classList.remove("is-active");
           item.setAttribute("aria-pressed", "false");
         });
         button.classList.add("is-active");
         button.setAttribute("aria-pressed", "true");
-
         updatePublicationFilters();
       });
     });
   }
 
-  function bindContactForm() {
-    const form = document.querySelector("[data-contact-form]");
-    const formNote = document.querySelector("[data-form-note]");
-
-    if (!form || !formNote) {
-      return;
-    }
-
-    form.addEventListener("submit", function (event) {
-      event.preventDefault();
-      formNote.textContent = "Thanks for drafting a message. This demo form has no backend yet, so please reach out by email until you connect a form service.";
-    });
-  }
-
+  /* ─────────────────────────────────────────────────────
+     Utilities
+  ───────────────────────────────────────────────────── */
   function createPublicationSearchText(item) {
-    return [item.title, item.authors, item.venue, item.year, item.abstract, item.tags.join(" ")]
+    return [item.title, item.authors, item.venue, item.year, item.abstract, (item.tags || []).join(" ")]
       .join(" ")
       .toLowerCase();
-  }
-
-  function isExternalResourceLink(url) {
-    return typeof url === "string" && (/^https?:\/\//.test(url) || url.startsWith("mailto:"));
   }
 })();

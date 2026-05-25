@@ -1,5 +1,5 @@
-		/* Replace the content in this file to personalize the site.
-   The layout and interactions live in assets/js/main.js. */
+/* Replace the content in this file to personalize the site.
+The layout and interactions live in assets/js/main.js. */
 window.siteData = {
   profile: {
     name: "Sunny Prakash Prajapati",
@@ -7,13 +7,13 @@ window.siteData = {
       "I create functional EdTech solutions for real-world contexts.",
     affiliation: "Centre for Educational Technology, Indian Institute of Technology Bombay",
     role: "PhD Candidate",
-    location: "Mumbai, India",
-    email: "22d1201@iitb.ac.in",
+    //location: "Mumbai, India",
+    //email: "22d1201@iitb.ac.in",
     scholarUrl: "https://scholar.google.com/citations?user=RWuM4NIAAAAJ&hl=en&oi=ao",
     logoFile: "assets/images/logo-sunny.png",
     logoAlt: "Stylized portrait logo of Sunny Prakash Prajapati",
     bioShort:
-      "Sunny Prakash Prajapati is a PhD researcher whose work sits at the intersection of educational technology, HCI in education, and learning experience design. He studies how phygital textbooks, AI-supported tools, and carefully designed classroom interfaces can strengthen active and collaborative learning.",
+      "Hi!, I am a PhD research scholar at the Centre for Educational Technology, Indian Institute of Technology Bombay. My research area relates to HCI in Learning and Education and Learning Experience Design (LxD), and I am doing my PhD under the guidance of Prof. Syaamantak Das. Please refer to my publications page to know more about my research.",
     bioLong: [
       "Sunny Prakash Prajapati is a PhD Research Scholar in Educational Technology at the Centre for Educational Technology, Indian Institute of Technology Bombay, where he is advised by Prof. Syaamantak Das. His research focuses on designing and evaluating phygital learning environments that connect print textbooks, smartphone companions, AI support, and collaborative classroom practice.",
       "Before beginning his PhD in 2022, Sunny completed an M.Des in Product Design and Engineering at the Indian Institute of Science and a B.Tech in Mechanical Engineering at MANIT Bhopal. His academic and professional experience spans design education, engineering, and teaching, including roles at PES University, National Institute of Design Bengaluru, Sardar Patel College of Engineering, Kendriya Vidyalaya IIT Powai, and TATA Advanced Systems."
@@ -28,20 +28,7 @@ window.siteData = {
       "Agent-based Modelling",
       "Complexity"
     ],
-    quickFacts: [
-      {
-        label: "Current focus",
-        value: "Developing LLM-integrated tools to support academic reading"
-      },
-      {
-        label: "Design background",
-        value: "Engineering, product design, teaching, and educational technology"
-      },
-      {
-        label: "Awards & Grants",
-        value: "Prime Minister's Research Fellowship, LOTUS Grant 2025, GMTA for ACM IUI 2023, and ACM SIGMM Travel Grant for IMX 2025"
-      }
-    ],
+    quickFacts: [],
     cvFile: "assets/files/researcher-cv.pdf"
   },
   about: {
@@ -107,7 +94,8 @@ window.siteData = {
     "project-phygital-textbooks",
     "project-active-reading",
     "project-robotub",
-    "project-sentence-sprint"
+    "project-sentence-sprint",
+    "project-mixed-reality"
   ],
   publications: [
     {
@@ -375,17 +363,17 @@ window.siteData = {
       details: {
         paragraphs: ["This project explored how print textbooks can be extended with digital layers while preserving the affordances of classroom reading and collaborative activity."],
         images: [
-		    {
-				src: "assets/images/iui_2.png",
-				alt: "Affordances of print media",
-				caption: "Concept diagram from the IUI 2023 companion paper."
-			},
-			{
-				src: "assets/images/iui_3.png",
-				alt: "Affordances of digital media",
-				caption: "Concept diagram from the IUI 2023 companion paper."
-			}
-    	]
+          {
+            src: "assets/images/iui_2.png",
+            alt: "Affordances of print media",
+            caption: "Concept diagram from the IUI 2023 companion paper."
+          },
+          {
+            src: "assets/images/iui_3.png",
+            alt: "Affordances of digital media",
+            caption: "Concept diagram from the IUI 2023 companion paper."
+          }
+        ]
       }
     },
     {
@@ -407,12 +395,12 @@ window.siteData = {
       details: {
         paragraphs: ["Here, the comparative analysis showed significantly lower perceived cognitive load in students who read the textbook with the smartphone-based companion application than the ones who read on the laptop. More insights are available in the related publication."],
         images: [
-			{
-				src: "assets/images/using_app.jpeg",
-				alt: "Student reading a textbook with a smartphone companion app",
-				caption: "Snapshots from the pilot study of a learner reading a textbook with a smartphone-based application"
-			},
-		]
+          {
+            src: "assets/images/using_app.jpeg",
+            alt: "Student reading a textbook with a smartphone companion app",
+            caption: "Snapshots from the pilot study of a learner reading a textbook with a smartphone-based application"
+          },
+        ]
       }
     },
     {
@@ -464,20 +452,20 @@ window.siteData = {
       details: {
         paragraphs: ["The Android APK is available from the project release."],
         images: [
-		    {
-				src: "assets/images/sentence-p-2.png",
-				alt: "Sentence sprint game",
-				caption: "Sentence Sprint"
-			},
-			{
-				src: "assets/images/sentence-p-3.png",
-				alt: "Sentence sprint game screen",
-				caption: "Sentence Sprint"
-			},
-    	]
+          {
+            src: "assets/images/sentence-p-2.png",
+            alt: "Sentence sprint game",
+            caption: "Sentence Sprint"
+          },
+          {
+            src: "assets/images/sentence-p-3.png",
+            alt: "Sentence sprint game screen",
+            caption: "Sentence Sprint"
+          },
+        ]
       }
-    }
-    /*{
+    },
+    {
       id: "project-mixed-reality",
       title: "AI-Augmented Mixed Reality Learning Interfaces",
       period: "2025-present",
@@ -495,12 +483,14 @@ window.siteData = {
       ],
       image: "assets/images/project-reflective-ai.svg",
       alt: "Abstract illustration representing mixed reality educational interface concepts",
-      links: [],
+      links: [
+        { label: "Proceedings", url: "https://library.apsce.net/index.php/ICCE/article/view/5938" }
+      ],
       details: {
         paragraphs: [],
         images: []
       }
-    }*/
+    }
   ],
   teaching: {
     intro:
@@ -535,7 +525,7 @@ window.siteData = {
       },
       {
         title: "Academic and professional experience",
-        eyebrow: " ",
+        eyebrow: "",
         items: [
           {
             title: "Faculty of Architecture and Design",
@@ -599,6 +589,13 @@ window.siteData = {
         "Workshop page for the augmented reading position paper highlighted in the research profile.",
       url: "https://chi-star-workshop.github.io/",
       linkLabel: "Open workshop page"
+    },
+    {
+      title: "UI UX Pro Max: Academic Portfolio Card System",
+      description:
+        "Design reference used for this redesign: Portfolio Grid, Editorial Grid, Trust & Authority, academic typography, and restrained yellow accent usage.",
+      url: "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+      linkLabel: "Open design reference"
     }
   ],
   contact: {
@@ -610,11 +607,11 @@ window.siteData = {
         value: "22d1201@iitb.ac.in",
         url: "mailto:22d1201@iitb.ac.in"
       },
-     /* {
+      {
         label: "Google Scholar",
         value: "Scholar profile",
         url: "https://scholar.google.com/citations?user=RWuM4NIAAAAJ&hl=en&oi=ao"
-      },*/
+      },
       {
         label: "LinkedIn",
         value: "sunny-prakash-prajapati",
