@@ -4,7 +4,7 @@ window.siteData = {
   profile: {
     name: "Sunny Prakash Prajapati",
     tagline:
-      "I create functional EdTech solutions for real-world contexts.",
+      "I design and study educational technology for classroom learning.",
     affiliation: "Centre for Educational Technology, Indian Institute of Technology Bombay",
     role: "PhD Candidate",
     //location: "Mumbai, India",
@@ -13,7 +13,7 @@ window.siteData = {
     logoFile: "assets/images/logo-sunny.png",
     logoAlt: "Stylized portrait logo of Sunny Prakash Prajapati",
     bioShort:
-      "Hi!, I am a PhD research scholar at the Centre for Educational Technology, Indian Institute of Technology Bombay. My research area relates to HCI in Learning and Education and Learning Experience Design (LxD), and I am doing my PhD under the guidance of Prof. Syaamantak Das. Please refer to my publications page to know more about my research.",
+      "I am a PhD research scholar at the Centre for Educational Technology, Indian Institute of Technology Bombay. My work brings HCI in education, learning experience design, and classroom-grounded evaluation together to study phygital learning environments.",
     bioLong: [
       "Sunny Prakash Prajapati is a PhD Research Scholar in Educational Technology at the Centre for Educational Technology, Indian Institute of Technology Bombay, where he is advised by Prof. Syaamantak Das. His research focuses on designing and evaluating phygital learning environments that connect print textbooks, smartphone companions, AI support, and collaborative classroom practice.",
       "Before beginning his PhD in 2022, Sunny completed an M.Des in Product Design and Engineering at the Indian Institute of Science and a B.Tech in Mechanical Engineering at MANIT Bhopal. His academic and professional experience spans design education, engineering, and teaching, including roles at PES University, National Institute of Design Bengaluru, Sardar Patel College of Engineering, Kendriya Vidyalaya IIT Powai, and TATA Advanced Systems."
@@ -28,7 +28,24 @@ window.siteData = {
       "Agent-based Modelling",
       "Complexity"
     ],
-    quickFacts: [],
+    quickFacts: [
+      {
+        label: "Current role",
+        value: "PhD Candidate, IIT Bombay"
+      },
+      {
+        label: "Fellowship",
+        value: "Prime Minister's Research Fellowship"
+      },
+      {
+        label: "Research focus",
+        value: "Phygital learning environments"
+      },
+      {
+        label: "Recent venues",
+        value: "Frontiers, ACM IMX, ICCE"
+      }
+    ],
     cvFile: "assets/files/researcher-cv.pdf"
   },
   about: {
@@ -591,11 +608,11 @@ window.siteData = {
       linkLabel: "Open workshop page"
     },
     {
-      title: "UI UX Pro Max: Academic Portfolio Card System",
+      title: "Google Scholar Profile",
       description:
-        "Design reference used for this redesign: Portfolio Grid, Editorial Grid, Trust & Authority, academic typography, and restrained yellow accent usage.",
-      url: "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
-      linkLabel: "Open design reference"
+        "Full publication listing, citation metrics, and links to indexed research outputs.",
+      url: "https://scholar.google.com/citations?user=RWuM4NIAAAAJ&hl=en&oi=ao",
+      linkLabel: "Open Google Scholar"
     }
   ],
   contact: {
