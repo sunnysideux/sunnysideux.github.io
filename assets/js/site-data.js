@@ -14,10 +14,7 @@ window.siteData = {
     logoAlt: "Stylized portrait logo of Sunny Prakash Prajapati",
     bioShort:
       "I am a PhD research scholar at the Centre for Educational Technology, Indian Institute of Technology Bombay. My work brings HCI in education, learning experience design, and classroom-grounded evaluation together to study phygital learning environments.",
-    bioLong: [
-      "Sunny Prakash Prajapati is a PhD Research Scholar in Educational Technology at the Centre for Educational Technology, Indian Institute of Technology Bombay, where he is advised by Prof. Syaamantak Das. His research focuses on designing and evaluating phygital learning environments that connect print textbooks, smartphone companions, AI support, and collaborative classroom practice.",
-      "Before beginning his PhD in 2022, Sunny completed an M.Des in Product Design and Engineering at the Indian Institute of Science and a B.Tech in Mechanical Engineering at MANIT Bhopal. His academic and professional experience spans design education, engineering, and teaching, including roles at PES University, National Institute of Design Bengaluru, Sardar Patel College of Engineering, Kendriya Vidyalaya IIT Powai, and TATA Advanced Systems."
-    ],
+    bioLong: [" "],
     researchInterests: [
       "HCI in Education",
       "Educational Technology",
@@ -34,27 +31,21 @@ window.siteData = {
         value: "PhD Candidate, IIT Bombay"
       },
       {
-        label: "Fellowship",
-        value: "Prime Minister's Research Fellowship"
+        label: "Fellowships and Grants",
+        value: "Prime Minister's Research Fellowship, LOTUS Grant"
       },
       {
         label: "Research focus",
-        value: "Phygital learning environments"
-      },
-      {
-        label: "Recent venues",
-        value: "Frontiers, ACM IMX, ICCE"
+        value: "Phygital learning environments, Academic reading"
       }
     ],
     cvFile: "assets/files/researcher-cv.pdf"
   },
   about: {
     pageIntro:
-      "My research explores how effective EdTech solutions can be designed for authentic learning settings using technologies like XR and LLMs. For my PhD thesis, I am investigating academic reading behaviors of school students in phygital settings. Please refer to my publications to know more about my research.",
+      "My research explores how effective EdTech solutions can be designed for authentic learning settings using technologies like XR and LLMs. For my PhD thesis, I am investigating academic reading behaviors of school students in phygital settings. Please refer to my publications to know more about my research. My background combines engineering, product design, and educational technology. That path continues to shape how I approach research: I try to consciously create systems for learning that are useful and have the potential for real-world use.",
     currentAffiliation:
       "I am currently a PhD Research Scholar at the Centre for Educational Technology, IIT Bombay",
-    background:
-      "My background combines engineering, product design, and educational technology. That path continues to shape how I approach research: I try to consciously create systems for learning that are useful and have the potential for real-world use.",
     education: [
       {
         degree: "PhD in Educational Technology",
@@ -358,6 +349,36 @@ window.siteData = {
   ],
   projects: [
     {
+      id: "project-saap-jodo",
+      title: "Saap_jodo: A Bilingual Addition Game",
+      period: "2026",
+      summary:
+        "A bilingual browser-based addition game for children ages 6-8 / Grades 1-2. Children roll a die, add its value to their current board position, and move to the resulting square.",
+      tags: [
+        "Game-based learning",
+        "Learning experience design",
+        "Accessible web design"
+      ],
+      outcomes: [
+        "Designed two progressive addition levels, with displayed sums up to 30 in Level 1 and 54 in Level 2",
+        "Built equivalent English and Hindi interfaces with count-on hints and child-friendly assisted progression",
+        "Supported touch, keyboard, screen readers, and reduced-motion preferences while keeping progress local to the browser"
+      ],
+      image: "assets/images/saap-jodo-project.png",
+      alt: "Saap_jodo jungle addition game with a friendly monkey, ladder, and snake",
+      links: [
+        { label: "Play Game", url: "https://sunnysideux.github.io/Saap_jodo/" },
+        { label: "View Source", url: "https://github.com/sunnysideux/Saap_jodo" }
+      ],
+      details: {
+        paragraphs: [
+          "Saap_jodo uses a familiar snakes-and-ladders structure to turn each move into an addition problem. Each turn asks the child to add a die value from 1-6 to the current board position before the character moves to the resulting square.",
+          "The game offers two serpentine boards, progressive count-on hints, equivalent English and Hindi interfaces, and support for touch, keyboard, screen readers, and reduced-motion preferences. Learning progress remains in the browser, with no accounts or analytics."
+        ],
+        images: []
+      }
+    },
+    {
       id: "project-phygital-textbooks",
       title: "Conceptualization of Phygital Textbooks for Learning",
       period: "2022-2023",
@@ -583,13 +604,8 @@ window.siteData = {
     ]
   },
   cv: {
-    note:
-      "The downloadable CV PDF includes education, publications, teaching, awards, grants, and academic service.",
-    highlights: [
-      "PMRF Fellow and PhD Research Scholar in Educational Technology at IIT Bombay",
-      "Research on phygital textbooks, active reading, AI-augmented learning interfaces, and usability evaluation",
-      "Publications in Frontiers in Education, ACM IMX, ACM IUI, ICCE, Procedia Computer Science, and IEEE venues",
-      "Teaching and instructional experience across IIT-linked school education, design education, and university-level courses"
+    note:" ",
+    highlights: [ " "
     ]
   },
   resources: [
